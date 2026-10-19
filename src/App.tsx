@@ -4,7 +4,6 @@ import { Download } from "./components/Download";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
-import { NotBuilt } from "./components/NotBuilt";
 import { Privacy } from "./components/Privacy";
 import { Problems } from "./components/Problems";
 import { Speed } from "./components/Speed";
@@ -21,7 +20,6 @@ export default function App() {
         <Core />
         <WhyExtensions />
         <Agent />
-        <NotBuilt />
         <Privacy />
         <Download />
       </main>

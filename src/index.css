@@ -1,3 +1,24 @@
+@font-face {
+  font-family: "Geist";
+  src: url("../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Pixel Square";
+  src: url("../node_modules/geist/dist/fonts/geist-pixel/GeistPixel-Square.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
 :root {
   --canvas: #f6f4ef;
   --surface: #ffffff;
@@ -10,10 +31,9 @@
   --accent: #5163f9;
   --on-ink: #ffffff;
   --shadow: 0 24px 60px rgb(20 20 20 / 0.08), 0 1px 3px rgb(20 20 20 / 0.05);
-  --serif: ui-serif, "New York", "Newsreader Variable", Georgia, serif;
-  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui,
-    sans-serif;
-  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --display: "Geist Pixel Square", "Geist Mono", ui-monospace, monospace;
+  --sans: "Geist", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --radius-control: 8px;
   --radius-row: 12px;
   --radius-panel: 22px;
@@ -65,8 +85,8 @@ a {
 h1,
 h2,
 h3 {
-  font-family: var(--serif);
-  font-weight: 600;
+  font-family: var(--display);
+  font-weight: 500;
   margin: 0;
   text-wrap: balance;
 }
@@ -113,9 +133,9 @@ main,
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -145,8 +165,8 @@ main,
   height: 44px;
   padding: 0 22px;
   border-radius: 999px;
-  background: var(--ink);
-  color: var(--on-ink);
+  background: var(--accent);
+  color: #ffffff;
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
@@ -197,8 +217,8 @@ main,
   font: inherit;
   font-size: 13px;
   font-weight: 600;
-  color: var(--ink);
-  background: var(--selected);
+  color: #ffffff;
+  background: var(--accent);
   border: 0;
   border-radius: var(--radius-control);
   padding: 6px 12px;
@@ -213,7 +233,6 @@ main,
 .headline {
   font-size: clamp(32px, 5vw, 48px);
   line-height: 1.1;
-  letter-spacing: -0.015em;
 }
 
 .headline span {
@@ -225,13 +244,12 @@ main,
   display: flex;
   flex-direction: column;
   gap: 22px;
-  padding: 88px 0 72px;
+  padding: 64px 0 72px;
 }
 
 .hero .headline {
   font-size: clamp(44px, 8vw, 80px);
   line-height: 1.02;
-  letter-spacing: -0.025em;
   max-width: 12ch;
 }
 
@@ -700,11 +718,10 @@ main,
 .struck-list li {
   position: relative;
   width: fit-content;
-  font-family: var(--serif);
-  font-weight: 600;
+  font-family: var(--display);
+  font-weight: 500;
   font-size: clamp(30px, 5.6vw, 56px);
   line-height: 1.15;
-  letter-spacing: -0.015em;
   transition: color 300ms var(--ease-out);
   transition-delay: calc(var(--delay) + 300ms);
 }
@@ -881,7 +898,7 @@ main,
 
 .panel-header strong {
   display: block;
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 20px;
   font-weight: 600;
 }
@@ -992,13 +1009,13 @@ main,
   align-items: center;
   gap: 4px;
   margin-left: -6px;
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 20px;
   font-weight: 600;
 }
 
 .panel-display {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 24px;
   font-weight: 600;
   line-height: 1.15;
@@ -1118,29 +1135,6 @@ main,
   opacity: 1;
 }
 
-.not-built {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0 32px;
-  margin: 0;
-}
-
-.not-built div {
-  padding: 14px 0;
-}
-
-.not-built dt {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 21px;
-}
-
-.not-built dd {
-  margin: 2px 0 0;
-  font-size: 15px;
-  color: var(--ink-secondary);
-}
-
 .download {
   align-items: center;
   text-align: center;
@@ -1239,7 +1233,6 @@ main,
 
 @media (max-width: 720px) {
   .fixes,
-  .not-built,
   .reasons,
   .split,
   .split.reverse {

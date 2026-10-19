@@ -2,7 +2,6 @@ const repo = "https://github.com/Joelheile/voz";
 
 export const links = {
   repo,
-  download: `${repo}/releases/latest`,
   extensions: "/extensions/",
   security: `${repo}/blob/main/SECURITY.md`,
   issues: `${repo}/issues`,
@@ -10,4 +9,4 @@ export const links = {
 };
 
 export const installCommand =
-  "curl -fsSL https://raw.githubusercontent.com/Joelheile/voz/main/install.sh | bash";
+  "curl -fsSL https://voz.joels.tech/install | bash";

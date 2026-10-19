@@ -10,8 +10,8 @@ export function Header() {
       <nav>
         <a href={links.extensions}>Extensions</a>
         <a href={links.repo}>GitHub</a>
-        <a className="button small" href={links.download}>
-          Download
+        <a className="button small" href="/#install">
+          Install
         </a>
       </nav>
     </header>
