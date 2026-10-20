@@ -31,3 +31,7 @@ npm run deploy
 ```
 
 This builds and runs `wrangler deploy`. You need `wrangler login` once. Pushing to `main` does not deploy.
+
+## License
+
+[MIT](LICENSE)
