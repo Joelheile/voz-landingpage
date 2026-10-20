@@ -563,12 +563,61 @@ main,
   stroke-dashoffset: 0;
 }
 
-.dictation-body {
+.stage {
+  display: grid;
+  padding: 72px 24px 32px;
+}
+
+.scene {
+  grid-area: 1 / 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 72px 24px 32px;
+  justify-content: center;
+  gap: 24px;
+  transition:
+    opacity 300ms var(--ease-out),
+    filter 300ms var(--ease-out),
+    transform 300ms var(--ease-out);
+}
+
+.scene[data-active="false"] {
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateY(8px) scale(0.98);
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-tertiary);
+}
+
+.waveform {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 56px;
+  opacity: 0.35;
+  transition: opacity 300ms var(--ease-out);
+}
+
+.waveform[data-recording="true"] {
+  opacity: 1;
+}
+
+.waveform i {
+  width: 4px;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+  transition: transform 150ms var(--ease-out);
 }
 
 .shortcut {
@@ -599,10 +648,6 @@ main,
   font-weight: 500;
   color: var(--ink);
   transition: opacity var(--section) var(--ease-out);
-}
-
-.spoken.gone {
-  opacity: 0;
 }
 
 .word {
@@ -748,28 +793,14 @@ main,
   transform: scaleX(0);
 }
 
-.problems .headline {
-  margin-top: 40px;
-}
-
 .fixes {
   list-style: none;
   margin: 0;
   padding: 0;
-  counter-reset: fix;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
-}
-
-.fixes li::before {
-  counter-increment: fix;
-  content: "0" counter(fix);
-  display: block;
-  margin-bottom: 10px;
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--ink-tertiary);
+  margin-top: 40px;
 }
 
 .fixes h3 {
@@ -854,12 +885,6 @@ main,
   border: 1px solid var(--hairline);
   border-radius: var(--radius-row);
   background: var(--surface);
-}
-
-.logo {
-  font-size: clamp(9px, 2.2vw, 14px);
-  line-height: 1.15;
-  color: var(--ink);
 }
 
 .panel {
@@ -1135,6 +1160,53 @@ main,
   opacity: 1;
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.browse {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 64px;
+  padding-bottom: 96px;
+}
+
+.packages {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.packages li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  padding: 20px 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.packages a {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.packages p {
+  flex-basis: 100%;
+  color: var(--ink-secondary);
+}
+
+.packages .command {
+  flex-basis: 100%;
+  margin-top: 8px;
+}
+
 .download {
   align-items: center;
   text-align: center;
@@ -1251,10 +1323,6 @@ main,
     font-size: 11px;
   }
 
-  .logo {
-    font-size: 9px;
-  }
-
   .footer {
     flex-direction: column;
     gap: 16px;
@@ -1272,8 +1340,13 @@ main,
   }
 
   .section .headline span,
-  .word {
+  .word,
+  .scene {
     filter: none !important;
+  }
+
+  .scene {
+    transform: none !important;
   }
 
   .struck-list li::after,
@@ -1281,7 +1354,8 @@ main,
   .usage i,
   .notch,
   .wing,
-  .shortcut {
+  .shortcut,
+  .waveform i {
     transition: none !important;
   }
 

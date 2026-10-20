@@ -7,6 +7,7 @@ export function Footer() {
       <nav>
         <a href={links.repo}>GitHub</a>
         <a href={links.extensions}>Extensions</a>
+        <a href={links.buildExtension}>Build an extension</a>
         <a href={links.security}>Privacy</a>
         <a href={links.issues}>Issues</a>
       </nav>

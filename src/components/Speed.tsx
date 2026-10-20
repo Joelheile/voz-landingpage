@@ -10,9 +10,8 @@ export function Speed() {
         <Headline text="You talk 150 words a minute, you type 40" />
         <AsciiBars />
         <p>
-          voz drops the "um"s, fixes punctuation and spells names the way your
-          dictionary does. Recognition and cleanup run on your Mac, so it works
-          on a plane. Insights counts the time you got back.
+          Voz cuts the "um"s and fixes punctuation. It all runs on your Mac,
+          so it works offline.
         </p>
       </div>
       <InsightsPanel />

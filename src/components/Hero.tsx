@@ -1,6 +1,5 @@
 import { delay } from "../delay";
 import { installCommand } from "../links";
-import { AsciiIcon } from "./AsciiIcon";
 import { CopyCommand } from "./CopyCommand";
 import { DictationDemo } from "./DictationDemo";
 import { Headline } from "./Headline";
@@ -8,10 +7,9 @@ import { Headline } from "./Headline";
 export function Hero() {
   return (
     <section className="hero">
-      <AsciiIcon />
       <Headline as="h1" text="Tiny, fast dictation you can extend" />
       <p className="lead rise" style={delay(450)}>
-        Tap right ⌘ and talk. voz types clean text into any app on your Mac.
+        Tap right ⌘ and talk. Voz types clean text into any app on your Mac.
         <br />
         Free, open source and offline.
       </p>

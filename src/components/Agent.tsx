@@ -1,28 +1,28 @@
 import { links } from "../links";
 import { AgentDemo } from "./AgentDemo";
-import { CopyCommand } from "./CopyCommand";
 import { Headline } from "./Headline";
 import { Section } from "./Section";
 
 export function Agent() {
   return (
     <Section>
-      <Headline text="No PR, your agent writes the extension" />
+      <Headline text="Describe it, save it, share it" />
       <p>
         Open a coding agent in <code>~/.voz</code> and say what you want. It
-        reads the guide voz keeps there and writes a TypeScript file. voz
-        reloads it when you save.
+        reads <code>AGENTS.md</code>, the guide Voz keeps there, and writes the
+        extension. Voz loads it when the file is saved.
       </p>
       <AgentDemo />
       <p>
-        Share yours as an npm package with the <code>voz-package</code>{" "}
-        keyword, or install someone else's:
+        Publish it to npm with the <code>voz-package</code> keyword and it shows
+        up in the extension list for everyone.
       </p>
-      <CopyCommand command="voz install npm:voz-jira" />
-      <p className="note">
-        <a href={links.extensions}>Read the extension docs</a> or{" "}
-        <a href={links.npm}>browse packages</a>
-      </p>
+      <div className="actions">
+        <a className="button" href={links.buildExtension}>
+          Build an extension
+        </a>
+        <a href={links.extensions}>Browse extensions</a>
+      </div>
     </Section>
   );
 }

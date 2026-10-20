@@ -3,16 +3,12 @@ import { Section } from "./Section";
 
 const reasons = [
   {
-    label: "~/.voz/extensions",
-    body: "Save a .ts file and voz loads it. Edit it and voz reloads it",
-  },
-  {
     label: "hooks",
     body: "Change the cleanup prompt, rewrite text before it lands, add voice commands or grab each recording",
   },
   {
     label: "full access",
-    body: "Use any Bun or Node API, your files and the network. Bun runs extensions next to voz, not inside it",
+    body: "Use any Bun or Node API, your files and the network. Bun runs extensions next to Voz, not inside it",
   },
   {
     label: "npm",
@@ -24,18 +20,27 @@ const reasons = [
   },
   {
     label: "never blocks",
-    body: "If an extension crashes or takes too long, voz inserts your text anyway",
+    body: "If an extension crashes or takes too long, Voz inserts your text anyway",
+  },
+  {
+    label: "hot reload",
+    body: "Save a .ts file in ~/.voz/extensions and Voz loads it. Edit it and Voz reloads it",
   },
 ];
 
 export function WhyExtensions() {
   return (
     <Section>
-      <Headline text="Adapt voz to how you work" />
+      <Headline text="Every extra is an extension" />
       <p>
-        Most dictation apps add a setting for every request until nobody can
-        find anything. voz keeps the core small. Everything else is a
-        TypeScript file you own.
+        Dictation apps add a setting for every request until nobody can find
+        anything. Voz keeps the core to recording, transcription, cleanup and
+        insertion. Everything else is a TypeScript file you own.
+      </p>
+      <p>
+        A small core only works if extensions are cheap to write. With a coding
+        agent they are: you describe what you want, and it writes a few lines
+        against a small, typed API.
       </p>
       <dl className="reasons">
         {reasons.map((reason) => (

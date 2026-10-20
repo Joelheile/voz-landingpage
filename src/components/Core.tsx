@@ -9,7 +9,7 @@ export function Core() {
       <Headline text="A tiny core, no settings maze" />
       <p>
         The core records, transcribes, cleans up, inserts and saves your
-        history. Extensions hook in between the steps. Install none and voz
+        history. Extensions hook in between the steps. Install none and Voz
         runs nothing extra.
       </p>
       <Pipeline />
@@ -18,7 +18,7 @@ export function Core() {
         <div className="split-text">
           <h3>Lives in the menu bar</h3>
           <p>
-            One panel shows what voz is doing and your last transcripts. Click
+            One panel shows what Voz is doing and your last transcripts. Click
             one to copy it. Search finds the rest.
           </p>
         </div>

@@ -5,10 +5,11 @@ export function Header() {
     <header className="header">
       <a className="brand" href="/">
         <img src="/icon.png" alt="" width={24} height={24} />
-        voz
+        Voz
       </a>
       <nav>
         <a href={links.extensions}>Extensions</a>
+        <a href={links.buildExtension}>Build</a>
         <a href={links.repo}>GitHub</a>
         <a className="button small" href="/#install">
           Install

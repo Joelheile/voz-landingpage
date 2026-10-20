@@ -1,5 +1,4 @@
 import { delay } from "../delay";
-import { Headline } from "./Headline";
 import { Section } from "./Section";
 
 const problems = [
@@ -18,8 +17,8 @@ const fixes = [
     body: "Record, transcribe, clean up, insert. Nothing else runs on your words",
   },
   {
-    title: "No PR needed",
-    body: "Your coding agent reads ~/.voz/AGENTS.md and writes the extension",
+    title: "Extend it yourself",
+    body: "Add what you need as a small TypeScript extension instead of waiting on a maintainer",
   },
 ];
 
@@ -33,15 +32,14 @@ export function Problems() {
           </li>
         ))}
       </ul>
-      <Headline text="voz fixes all three" />
-      <ol className="fixes">
+      <ul className="fixes">
         {fixes.map((fix) => (
           <li key={fix.title}>
             <h3>{fix.title}</h3>
             <p>{fix.body}</p>
           </li>
         ))}
-      </ol>
+      </ul>
     </Section>
   );
 }

@@ -39,7 +39,7 @@ export function InsightsPanel() {
         </strong>
         <p className="panel-text">
           212 today, 18,940 in total, about 7 h of typing saved. You speak at
-          148 words per minute. voz removed 311 filler words.
+          148 words per minute. Voz removed 311 filler words.
         </p>
         <span className="panel-label">Last 30 days</span>
         <div className="chart">
