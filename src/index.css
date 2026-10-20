@@ -810,8 +810,8 @@ main,
 }
 
 .reasons dt {
-  font-family: var(--mono);
-  font-size: 13px;
+  font-family: var(--display);
+  font-size: 15px;
 }
 
 .reasons dd {
@@ -898,9 +898,9 @@ main,
 
 .panel-header strong {
   display: block;
-  font-family: var(--sans);
+  font-family: var(--display);
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .panel-header span {
@@ -1009,15 +1009,15 @@ main,
   align-items: center;
   gap: 4px;
   margin-left: -6px;
-  font-family: var(--sans);
+  font-family: var(--display);
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .panel-display {
-  font-family: var(--sans);
+  font-family: var(--display);
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.15;
   font-variant-numeric: tabular-nums;
 }
