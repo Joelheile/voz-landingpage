@@ -1,4 +1,4 @@
-import { type CSSProperties, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { links } from "../links";
 import { CopyCommand } from "./CopyCommand";
 import { Footer } from "./Footer";
@@ -53,7 +53,8 @@ function ago(date: string) {
 }
 
 function repositoryURL(raw?: string) {
-  return raw?.replace(/^git\+/, "").replace(/\.git$/, "");
+  const url = raw?.replace(/^git\+/, "").replace(/\.git$/, "");
+  return url?.startsWith("https://") ? url : undefined;
 }
 
 function toExtension(object: SearchObject): Extension {
@@ -207,7 +208,7 @@ function ExtensionCard({
   return (
     <li
       className="card"
-      style={{ "--index": Math.min(index, 12) } as CSSProperties}
+      style={{ "--index": Math.min(index, 12) }}
     >
       <div className="card-title">
         <h2>{extension.name}</h2>
