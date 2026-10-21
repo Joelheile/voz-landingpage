@@ -1,10 +1,19 @@
 export type IndicatorState = "hidden" | "recording" | "transcribing" | "done";
 
-export function NotchIndicator({ state }: { state: IndicatorState }) {
+const clock = (seconds: number) =>
+  `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+
+export function NotchIndicator({
+  state,
+  seconds,
+}: {
+  state: IndicatorState;
+  seconds: number;
+}) {
   return (
     <div className="notch" data-state={state}>
       <span className="wing leading">
-        <span className="rec-dot" />
+        <span className="timer">{clock(seconds)}</span>
       </span>
       <span className="wing trailing">
         <span className="level-bars">

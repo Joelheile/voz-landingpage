@@ -11,7 +11,7 @@ export function Header() {
         <a href={links.extensions}>Extensions</a>
         <a href={links.buildExtension}>Build</a>
         <a href={links.repo}>GitHub</a>
-        <a className="button small" href="/#install">
+        <a className="button small" href={links.install}>
           Install
         </a>
       </nav>

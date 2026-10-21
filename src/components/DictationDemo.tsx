@@ -55,6 +55,9 @@ export function DictationDemo() {
 
   const state = indicatorState(t);
   const pressed = t === start || t === stop;
+  const recordedSeconds = Math.floor(
+    (Math.max(start, Math.min(t, stop)) - start) * 0.15,
+  );
   const spoken = Math.max(
     0,
     Math.min(words.length, Math.floor((t - firstWord) / wordTicks) + 1),
@@ -71,7 +74,7 @@ export function DictationDemo() {
       aria-label={`You say "um so tell kaitlyn the uh deck is ready" and Voz types "${result}"`}
     >
       <div className="screen" aria-hidden="true">
-        <NotchIndicator state={state} />
+        <NotchIndicator state={state} seconds={recordedSeconds} />
       </div>
       <div className="stage" aria-hidden="true">
         <div className="scene" data-active={!inserting}>
@@ -81,7 +84,11 @@ export function DictationDemo() {
             </span>
             <span className="status">{status[state]}</span>
           </div>
-          <Waveform t={t} recording={state === "recording"} speaking={speaking} />
+          <Waveform
+            t={t}
+            recording={state === "recording"}
+            speaking={speaking}
+          />
           <p className="spoken">
             {words.map((word, i) => {
               const filler = word.clean === null;

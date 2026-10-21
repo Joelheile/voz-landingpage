@@ -2,6 +2,7 @@ const repo = "https://github.com/Joelheile/voz";
 
 export const links = {
   repo,
+  install: "/#install",
   extensions: "/extensions/",
   buildExtension: "/build-extension/",
   security: `${repo}/blob/main/SECURITY.md`,

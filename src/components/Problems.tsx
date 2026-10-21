@@ -1,4 +1,5 @@
 import { delay } from "../delay";
+import { Headline } from "./Headline";
 import { Section } from "./Section";
 
 const problems = [
@@ -7,24 +8,10 @@ const problems = [
   "Waiting months on your PR",
 ];
 
-const fixes = [
-  {
-    title: "Free and open source",
-    body: "MIT licensed, no account, no weekly word limit",
-  },
-  {
-    title: "A tiny core",
-    body: "Record, transcribe, clean up, insert. Nothing else runs on your words",
-  },
-  {
-    title: "Extend it yourself",
-    body: "Add what you need as a small TypeScript extension instead of waiting on a maintainer",
-  },
-];
-
 export function Problems() {
   return (
     <Section className="problems">
+      <Headline text="Why Voz exists" />
       <ul className="struck-list">
         {problems.map((problem, i) => (
           <li key={problem} style={delay(200 + i * 220)}>
@@ -32,14 +19,12 @@ export function Problems() {
           </li>
         ))}
       </ul>
-      <ul className="fixes">
-        {fixes.map((fix) => (
-          <li key={fix.title}>
-            <h3>{fix.title}</h3>
-            <p>{fix.body}</p>
-          </li>
-        ))}
-      </ul>
+      <p>
+        Dictation apps charge every month for what your Mac can do offline. Each
+        feature someone asks for becomes another setting, and every setting
+        slows the core down. If you need a change, you open an issue and wait
+        for a maintainer, often forever.
+      </p>
     </Section>
   );
 }
