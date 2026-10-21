@@ -50,7 +50,6 @@ export function HomePanel() {
     <div ref={ref}>
       <Panel label="The Voz menu bar panel with its status, recent transcripts and a stats line">
         <div className="panel-header">
-          <span className="status-mark" data-status={status} />
           <div>
             <strong>{statuses[status].title}</strong>
             <span>{statuses[status].hint}</span>
