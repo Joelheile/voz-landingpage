@@ -1,3 +1,4 @@
+import { Agent } from "./components/Agent";
 import { Core } from "./components/Core";
 import { Download } from "./components/Download";
 import { Footer } from "./components/Footer";
@@ -19,8 +20,9 @@ export default function App() {
         <Solutions />
         <Speed />
         <Core />
-        <Privacy />
         <MakeItYours />
+        <Privacy />
+        <Agent />
         <Download />
       </main>
       <Footer />
