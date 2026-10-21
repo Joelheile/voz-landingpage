@@ -15,7 +15,7 @@ const markdown = new Marked({
   },
 });
 
-const html = markdown.parse(source) as string;
+const html = markdown.parse(source, { async: false });
 
 export function Docs() {
   return (

@@ -1,8 +1,73 @@
 import { useInView } from "../hooks/useInView";
 import { useTicks } from "../hooks/useTicks";
 import { Chat } from "./Chat";
-import { NotchIndicator, type IndicatorState } from "./NotchIndicator";
-import { Waveform } from "./Waveform";
+
+type IndicatorState = "hidden" | "recording" | "transcribing" | "done";
+
+const clock = (seconds: number) =>
+  `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+
+function NotchIndicator({
+  state,
+  seconds,
+}: {
+  state: IndicatorState;
+  seconds: number;
+}) {
+  return (
+    <div className="notch" data-state={state}>
+      <span className="wing leading">
+        <span className="timer">{clock(seconds)}</span>
+      </span>
+      <span className="wing trailing">
+        <span className="level-bars">
+          <i />
+          <i />
+          <i />
+          <i />
+          <i />
+        </span>
+        <span className="progress-dots">
+          <i />
+          <i />
+          <i />
+        </span>
+        <svg className="check" viewBox="0 0 16 16">
+          <path d="M3.5 8.5l3 3 6-7" />
+        </svg>
+      </span>
+    </div>
+  );
+}
+
+const bars = 32;
+
+function level(t: number, bar: number) {
+  const edge = Math.sin(((bar + 0.5) / bars) * Math.PI);
+  const wobble = Math.abs(Math.sin(t * 1.9 + bar * 0.83) * Math.cos(t * 0.7 + bar * 0.37));
+  return 0.15 + 0.85 * edge * wobble;
+}
+
+function Waveform({
+  t,
+  recording,
+  speaking,
+}: {
+  t: number;
+  recording: boolean;
+  speaking: boolean;
+}) {
+  return (
+    <div className="waveform" data-recording={recording}>
+      {Array.from({ length: bars }, (_, bar) => (
+        <i
+          key={bar}
+          style={{ transform: `scaleY(${speaking ? level(t, bar) : 0.08})` }}
+        />
+      ))}
+    </div>
+  );
+}
 
 const words = [
   { raw: "um", clean: null },
