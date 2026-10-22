@@ -12,7 +12,7 @@ const ideas = [
 export function MakeItYours() {
   return (
     <Section>
-      <Headline text="Build what you need, share it with everyone" />
+      <Headline text="Build the extensions you need, share them with everyone" />
       <p>
         Instead of a setting for each wish, Voz has extensions. Small TypeScript
         files that can use your apps, files, terminal and the network.

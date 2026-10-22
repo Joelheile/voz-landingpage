@@ -1,70 +1,90 @@
 import { useInView } from "../hooks/useInView";
 import { useTicks } from "../hooks/useTicks";
 
-const stages = [
-  "voice",
-  "record",
-  "transcribe",
-  "clean up",
-  "insert",
-  "cursor",
-];
-const hooks = [
-  { stage: "cursor", name: "afterInsert" },
-  { stage: "insert", name: "beforeInsert" },
-  { stage: "clean up", name: "beforeCleanup" },
-  { stage: "record", name: "recording" },
+const words = [
+  { raw: "um", filler: true },
+  { raw: "so", filler: true },
+  { raw: "tell", clean: "Tell" },
+  { raw: "kaitlyn", clean: "Kaitlyn" },
+  { raw: "the" },
+  { raw: "uh", filler: true },
+  { raw: "deck" },
+  { raw: "is" },
+  { raw: "ready", clean: "ready." },
 ];
 
-const flow = stages.join(" ──▶ ");
-const column = (stage: string) =>
-  flow.indexOf(stage) + Math.floor(stage.length / 2);
+const steps = [
+  { title: "You talk", start: 0 },
+  { title: "Voz transcribes", start: 18 },
+  { title: "It cleans up", start: 34 },
+  { title: "It types", start: 50 },
+];
 
-function hookRows() {
-  const columns = hooks.map((hook) => column(hook.stage));
-  const width = Math.max(...columns) + 16;
-  const row = (marks: number[], label?: { at: number; text: string }) => {
-    const chars = Array.from({ length: width }, () => " ");
-    marks.forEach((at) => (chars[at] = "│"));
-    if (label)
-      [...("└─ " + label.text)].forEach(
-        (char, i) => (chars[label.at + i] = char),
-      );
-    return chars.join("").trimEnd();
-  };
-  return [
-    row(columns),
-    ...hooks.map((hook, i) =>
-      row(columns.slice(i + 1), { at: columns[i], text: hook.name }),
-    ),
-  ];
-}
+const bars = [
+  0.4, 0.7, 0.5, 0.9, 0.6, 1, 0.45, 0.8, 0.55, 0.95, 0.5, 0.75, 0.35, 0.85, 0.6,
+  0.9, 0.4, 0.7, 0.5, 0.8, 0.45, 0.65, 0.3, 0.55,
+];
 
-const lines = [flow, ...hookRows()];
-const length = Math.max(...lines.map((line) => line.length)) + 24;
+const length = 80;
+const marked = 37;
+const cleaned = 40;
 
 export function Pipeline() {
-  const [ref, inView] = useInView<HTMLPreElement>();
-  const cursor = useTicks({
-    running: inView,
-    interval: 45,
-    length,
-    loop: false,
-  });
+  const [ref, inView] = useInView<HTMLDivElement>(false);
+  const t = useTicks({ running: inView, interval: 100, length, loop: true });
+  const step = steps.findLastIndex((candidate) => t >= candidate.start);
 
   return (
-    <pre
-      ref={ref}
-      className="ascii pipeline"
-      aria-label="voice, record, transcribe, clean up, insert, cursor. Extensions hook in at recording, beforeCleanup, beforeInsert and afterInsert."
-    >
-      {lines.map((line, i) => (
-        <span key={i} aria-hidden="true">
-          <span className="lit">{line.slice(0, cursor + 1)}</span>
-          {line.slice(cursor + 1)}
-          {"\n"}
-        </span>
-      ))}
-    </pre>
+    <div ref={ref} className="pipeline">
+      <div
+        className="pipeline-stage"
+        role="img"
+        aria-label="You say “um so tell kaitlyn the uh deck is ready”. Voz transcribes it, removes the filler words and types “Tell Kaitlyn the deck is ready.” into Slack."
+      >
+        <div className="pipeline-field" data-step={step} aria-hidden="true">
+          <span className="pipeline-app">Slack · #launch</span>
+          <div className="pipeline-wave">
+            {bars.map((height, i) => (
+              <i
+                key={i}
+                style={{
+                  "--h": height,
+                  animationDelay: `${(i % 6) * -110}ms`,
+                }}
+              />
+            ))}
+          </div>
+          <p className="pipeline-text">
+            {words.map((word, i) => (
+              <span
+                key={word.raw + i}
+                className="pipeline-word"
+                data-shown={t >= steps[1].start + 3 + i * 1.5}
+                data-filler={word.filler && t >= marked}
+                data-gone={word.filler && t >= cleaned}
+              >
+                <span key={t >= cleaned && word.clean ? "clean" : "raw"}>
+                  {t >= cleaned && word.clean ? word.clean : word.raw}
+                </span>
+              </span>
+            ))}
+            <span className="pipeline-caret" />
+          </p>
+        </div>
+      </div>
+      <ol className="pipeline-steps">
+        {steps.map((candidate, i) => (
+          <li
+            key={candidate.title}
+            style={{
+              "--duration": `${((steps[i + 1]?.start ?? length) - candidate.start) * 100}ms`,
+            }}
+            data-state={i < step ? "done" : i === step ? "active" : "next"}
+          >
+            {candidate.title}
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }

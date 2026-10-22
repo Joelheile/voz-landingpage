@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { links } from "../links";
-import { CopyCommand } from "./CopyCommand";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 
@@ -8,17 +7,17 @@ type Extension = {
   name: string;
   description?: string;
   publisher?: string;
+  keywords: string[];
   monthly: number;
-  updated: string;
   repository?: string;
 };
 
 type SearchObject = {
   downloads?: { monthly: number };
-  updated: string;
   package: {
     name: string;
     description?: string;
+    keywords?: string[];
     publisher?: { username: string };
     links?: { repository?: string };
   };
@@ -29,28 +28,8 @@ type Result =
   | { state: "failed" }
   | { state: "loaded"; extensions: Extension[] };
 
-type Sort = "popular" | "recent";
-
 const search =
   "https://registry.npmjs.org/-/v1/search?text=keywords:voz-package&size=250";
-
-const compact = new Intl.NumberFormat("en-US", { notation: "compact" });
-const relative = new Intl.RelativeTimeFormat("en-US", { numeric: "auto" });
-
-const units: [Intl.RelativeTimeFormatUnit, number][] = [
-  ["year", 31_536_000_000],
-  ["month", 2_592_000_000],
-  ["week", 604_800_000],
-  ["day", 86_400_000],
-  ["hour", 3_600_000],
-];
-
-function ago(date: string) {
-  const elapsed = new Date(date).getTime() - Date.now();
-  const [unit, size] =
-    units.find(([, size]) => Math.abs(elapsed) >= size) ?? units[4];
-  return relative.format(Math.round(elapsed / size), unit);
-}
 
 function repositoryURL(raw?: string) {
   const url = raw?.replace(/^git\+/, "").replace(/\.git$/, "");
@@ -62,28 +41,27 @@ function toExtension(object: SearchObject): Extension {
     name: object.package.name,
     description: object.package.description,
     publisher: object.package.publisher?.username,
+    keywords: object.package.keywords ?? [],
     monthly: object.downloads?.monthly ?? 0,
-    updated: object.updated,
     repository: repositoryURL(object.package.links?.repository),
   };
 }
 
 function matches(extension: Extension, query: string) {
-  const text = [extension.name, extension.description, extension.publisher]
+  const text = [
+    extension.name,
+    extension.description,
+    extension.publisher,
+    ...extension.keywords,
+  ]
     .join(" ")
     .toLowerCase();
   return text.includes(query.trim().toLowerCase());
 }
 
-const order: Record<Sort, (a: Extension, b: Extension) => number> = {
-  popular: (a, b) => b.monthly - a.monthly,
-  recent: (a, b) => b.updated.localeCompare(a.updated),
-};
-
 export function Browse() {
   const [result, setResult] = useState<Result>({ state: "loading" });
   const [query, setQuery] = useState("");
-  const [sort, setSort] = useState<Sort>("popular");
 
   useEffect(() => {
     fetch(search)
@@ -104,7 +82,7 @@ export function Browse() {
     result.state === "loaded"
       ? result.extensions
           .filter((extension) => matches(extension, query))
-          .sort(order[sort])
+          .sort((a, b) => b.monthly - a.monthly)
       : [];
 
   return (
@@ -113,32 +91,9 @@ export function Browse() {
       <main className="browse">
         <h1 className="headline">Extensions</h1>
         <p>
-          What people built for Voz. Install one, or share your own so the next
-          person doesn't have to build it.
+          Open one in Voz to install it. Extensions can read your transcripts,
+          so check the source.
         </p>
-        <ol className="steps">
-          <li>
-            <strong>Get Voz</strong>
-            <span>
-              Free for Mac. <a href={links.install}>Install it</a> with one
-              command.
-            </span>
-          </li>
-          <li>
-            <strong>Install an extension</strong>
-            <span>
-              Click Install in the Voz menu bar panel under Extensions, or paste
-              its command into Terminal.
-            </span>
-          </li>
-          <li>
-            <strong>Dictate</strong>
-            <span>
-              It works right away. Extensions can read your transcripts, so read
-              the source first.
-            </span>
-          </li>
-        </ol>
         {result.state === "failed" && (
           <p className="note">npm did not answer. Try again in a moment.</p>
         )}
@@ -159,14 +114,6 @@ export function Browse() {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
               />
-              <select
-                aria-label="Sort"
-                value={sort}
-                onChange={(event) => setSort(event.target.value as Sort)}
-              >
-                <option value="popular">Most used</option>
-                <option value="recent">Recently updated</option>
-              </select>
             </div>
             <ul className="cards" aria-busy={result.state === "loading"}>
               {result.state === "loading"
@@ -182,7 +129,10 @@ export function Browse() {
                   ))}
             </ul>
             {result.state === "loaded" && shown.length === 0 && (
-              <p className="note">No extension matches "{query}".</p>
+              <p className="note">
+                No extension matches "{query}".{" "}
+                <a href={links.buildExtension}>Build it with voz new</a>
+              </p>
             )}
           </>
         )}
@@ -199,27 +149,70 @@ function ExtensionCard({
   extension: Extension;
   index: number;
 }) {
-  const details = [
-    extension.publisher && `by ${extension.publisher}`,
-    `${compact.format(extension.monthly)} a month`,
-    `updated ${ago(extension.updated)}`,
-  ].filter(Boolean);
+  const [missing, setMissing] = useState(false);
+  const source =
+    extension.repository ?? `https://www.npmjs.com/package/${extension.name}`;
+
+  function watchForVoz() {
+    setMissing(false);
+    const timer = setTimeout(() => setMissing(true), 1500);
+    window.addEventListener("blur", () => clearTimeout(timer), { once: true });
+  }
 
   return (
-    <li
-      className="card"
-      style={{ "--index": Math.min(index, 12) }}
-    >
-      <div className="card-title">
-        <h2>{extension.name}</h2>
-        <span className="card-links">
-          {extension.repository && <a href={extension.repository}>Source</a>}
-          <a href={`https://www.npmjs.com/package/${extension.name}`}>npm</a>
-        </span>
-      </div>
+    <li className="card" style={{ "--index": Math.min(index, 12) }}>
+      <h2>{extension.name}</h2>
       {extension.description && <p>{extension.description}</p>}
-      <span className="muted">{details.join(", ")}</span>
-      <CopyCommand command={`voz install npm:${extension.name}`} />
+      <span className="muted">
+        {extension.publisher && `by ${extension.publisher}, `}
+        <a href={source}>source</a>
+      </span>
+      <div className="card-actions">
+        <a
+          className="button small"
+          href={`voz://extensions/${extension.name}`}
+          onClick={watchForVoz}
+        >
+          Install
+        </a>
+        <CopyIcon text={`voz install ${extension.name}`} />
+      </div>
+      {missing && (
+        <span className="muted">
+          Voz did not open. <a href={links.install}>Get Voz</a>
+        </span>
+      )}
     </li>
+  );
+}
+
+function CopyIcon({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+
+  async function copy() {
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  }
+
+  return (
+    <button
+      type="button"
+      className="copy-icon"
+      onClick={copy}
+      aria-label={copied ? "Copied" : `Copy ${text}`}
+      title={text}
+    >
+      <svg viewBox="0 0 16 16" aria-hidden="true">
+        {copied ? (
+          <path d="M3.5 8.5l3 3 6-7" />
+        ) : (
+          <>
+            <rect x="5.5" y="5.5" width="8" height="8" rx="1.5" />
+            <path d="M10.5 5.5v-2a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3.5V9A1.5 1.5 0 0 0 4 10.5h1.5" />
+          </>
+        )}
+      </svg>
+    </button>
   );
 }

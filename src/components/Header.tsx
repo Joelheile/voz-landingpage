@@ -1,3 +1,4 @@
+import { trackFeatureRequest } from "../analytics";
 import { links } from "../links";
 
 export function Header() {
@@ -10,7 +11,7 @@ export function Header() {
       <nav>
         <a href={links.extensions}>Extensions</a>
         <a href={links.buildExtension}>Build</a>
-        <a href={links.repo}>GitHub</a>
+        <a href={links.featureRequest} onClick={() => trackFeatureRequest("header")}>Request a feature</a>
         <a className="button small" href={links.install}>
           Install
         </a>

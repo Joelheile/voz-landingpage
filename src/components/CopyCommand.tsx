@@ -1,10 +1,17 @@
 import { useState } from "react";
+import { trackInstallCopy } from "../analytics";
 
-export function CopyCommand({ command }: { command: string }) {
+export function CopyCommand({ command, location }: { command: string; location: "hero" | "footer" }) {
   const [copied, setCopied] = useState(false);
 
   async function copy() {
-    await navigator.clipboard.writeText(command);
+    try {
+      await navigator.clipboard.writeText(command);
+    } catch (error) {
+      trackInstallCopy(location, "failed");
+      throw error;
+    }
+    trackInstallCopy(location, "copied");
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   }

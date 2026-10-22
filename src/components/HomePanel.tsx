@@ -12,7 +12,7 @@ const transcripts = [
   "Ship it.",
 ];
 
-const ages = ["now", "2m", "9m", "24m", "1h"];
+const ages = ["1m ago", "2m ago", "9m ago", "24m ago", "1h ago"];
 const rowHeight = 38;
 const cycle = 8;
 
@@ -48,12 +48,20 @@ export function HomePanel() {
 
   return (
     <div ref={ref}>
-      <Panel label="The Voz menu bar panel with its status, recent transcripts and a stats line">
+      <Panel label="The Voz menu bar panel with its status, transcript search and recent transcripts">
         <div className="panel-header">
-          <div>
-            <strong>{statuses[status].title}</strong>
-            <span>{statuses[status].hint}</span>
-          </div>
+          <strong>
+            {status === "recording" && <i className="recording-mark" />}
+            {statuses[status].title}
+          </strong>
+          <span>{statuses[status].hint}</span>
+        </div>
+        <div className="search-field">
+          <svg viewBox="0 0 16 16">
+            <circle cx="7" cy="7" r="4.5" />
+            <path d="m10.5 10.5 3 3" />
+          </svg>
+          Search transcripts
         </div>
         <div className="rows" style={{ height: ages.length * rowHeight }}>
           <ul key={added} className={added > 0 ? "push" : undefined}>
@@ -68,31 +76,18 @@ export function HomePanel() {
             ))}
           </ul>
         </div>
-        <div className="stats-line">
-          <span>
-            {(1284 + added * 7).toLocaleString("en-US")} words this week, 148
-            wpm, 6-day streak
-          </span>
-          <svg viewBox="0 0 16 16">
-            <path d="m6 3.5 4.5 4.5L6 12.5" />
-          </svg>
-        </div>
         <div className="panel-footer">
           <svg viewBox="0 0 16 16">
-            <path d="M3 8a5 5 0 1 0 1.5-3.5M3 2.5V5h2.5" />
+            <rect x="2" y="8" width="3" height="5.5" rx="1" />
+            <rect x="6.5" y="5" width="3" height="8.5" rx="1" />
+            <rect x="11" y="2.5" width="3" height="11" rx="1" />
           </svg>
           <svg viewBox="0 0 16 16">
-            <path d="M3 5h3V3.5a1.5 1.5 0 0 1 3 0V5h3v3h-1.5a1.5 1.5 0 0 0 0 3H12v2.5H3z" />
+            <path d="M2.5 4.5h9V7a1.5 1.5 0 0 1 0 3v2.5h-9z" />
           </svg>
-          <svg viewBox="0 0 16 16">
-            <circle cx="8" cy="8" r="2.2" />
-            <circle
-              cx="8"
-              cy="8"
-              r="5.2"
-              strokeDasharray="2 2.08"
-              strokeWidth="2.4"
-            />
+          <svg viewBox="0 0 24 24" className="gear">
+            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+            <circle cx="12" cy="12" r="3" />
           </svg>
           <svg viewBox="0 0 16 16">
             <path d="M8 2v5.5M4.5 4.5a5 5 0 1 0 7 0" />

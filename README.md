@@ -32,6 +32,10 @@ npm run deploy
 
 This builds and runs `wrangler deploy`. You need `wrangler login` once. Pushing to `main` does not deploy.
 
+## Analytics
+
+Website analytics stay off until a visitor clicks Allow. The choice persists and can be changed under Website analytics in the footer. Data is stored in the EU. There are no session recordings or person profiles, and Do Not Track is respected.
+
 ## License
 
 [MIT](LICENSE)

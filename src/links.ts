@@ -5,7 +5,8 @@ export const links = {
   install: "/#install",
   extensions: "/extensions/",
   buildExtension: "/build-extension/",
-  security: `${repo}/blob/main/SECURITY.md`,
+  imprint: "https://www.joels.tech/imprint",
+  featureRequest: `${repo}/issues/new`,
   issues: `${repo}/issues`,
 };
 

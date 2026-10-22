@@ -8,9 +8,8 @@ export function Core() {
     <Section>
       <Headline text="A tiny core, no settings maze" />
       <p>
-        The core records, transcribes, cleans up, inserts and saves your
-        history. Extensions hook in between the steps. Install none and Voz
-        runs nothing extra.
+        Voz does four things and saves your history. Extensions plug in
+        between the steps. Add none and Voz runs nothing extra.
       </p>
       <Pipeline />
       <div className="split reverse">

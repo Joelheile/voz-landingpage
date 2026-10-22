@@ -8,12 +8,6 @@ const problems = [
   "Waiting months on your PR",
 ];
 
-const principles = [
-  "Speed and reliability come first. Nothing may slow down dictation",
-  "The core stays tiny. Everything else is an extension",
-  "Your tool, your way. Build what you need and share it",
-];
-
 export function Problems() {
   return (
     <Section className="problems">
@@ -26,16 +20,17 @@ export function Problems() {
         ))}
       </ul>
       <p>
-        I paid for Wispr Flow until the price annoyed me. The alternatives I
-        tried were bloated. Then I found Hex and liked it, but I couldn't make
-        it fit how I work. So I built Voz like pi: a small core, and extensions
-        for everything else.
+        I paid for Wispr Flow until paying a subscription to talk to my own
+        computer started to annoy me. The open source apps I tried felt bloated.
+        Hex came closest. I liked it, but every change I wanted meant a pull
+        request and a long wait.
       </p>
-      <ul className="ideas">
-        {principles.map((principle) => (
-          <li key={principle}>{principle}</li>
-        ))}
-      </ul>
+      <p>
+        So I built Voz the way pi works. The core records, transcribes, cleans
+        up and types, and I keep it fast. Anything else is an extension you
+        write for yourself. If it helps someone else, publish it and they can
+        install it from the menu bar.
+      </p>
     </Section>
   );
 }
