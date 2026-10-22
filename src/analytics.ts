@@ -54,7 +54,7 @@ export function trackInstallCopy(location: "hero" | "footer", state: "copied" | 
   client?.capture("install_command_copy", { location, state, method: "terminal" });
 }
 
-export function trackFeatureRequest(location: "header" | "hero" | "footer" | "download") {
+export function trackFeatureRequest(location: "header" | "download") {
   client?.capture("feature_request_opened", { location, destination: "github" });
 }
 

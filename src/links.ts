@@ -6,6 +6,7 @@ export const links = {
   extensions: "/extensions/",
   buildExtension: "/build-extension/",
   imprint: "https://www.joels.tech/imprint",
+  license: `${repo}/blob/main/LICENSE`,
   featureRequest: `${repo}/issues/new`,
   issues: `${repo}/issues`,
 };

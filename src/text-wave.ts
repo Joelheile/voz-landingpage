@@ -1,14 +1,7 @@
 type Rgb = readonly [number, number, number];
 type Layout = { cols: number; rows: number };
 
-const palette = {
-  background: [20, 18, 26],
-  text: [44, 41, 54],
-  edge: [150, 132, 186],
-  body: [116, 126, 250],
-  core: [255, 186, 138],
-  peak: [255, 240, 222],
-} satisfies Record<string, Rgb>;
+type Palette = Record<"text" | "edge" | "body" | "core" | "peak", Rgb>;
 
 const phrases = [
   "tell kaitlyn the deck is ready",
@@ -36,10 +29,29 @@ const mix = (from: Rgb, to: Rgb, amount: number): Rgb => {
   ];
 };
 
+const hex = (element: Element, name: string): Rgb => {
+  const value = getComputedStyle(element).getPropertyValue(name).trim();
+  const digits = Number.parseInt(value.slice(1), 16);
+  return [(digits >> 16) & 255, (digits >> 8) & 255, digits & 255];
+};
+
+const readPalette = (element: Element): Palette => {
+  const canvas = hex(element, "--canvas");
+  const ink = hex(element, "--ink");
+  const accent = hex(element, "--accent");
+  return {
+    text: mix(canvas, ink, 0.1),
+    edge: mix(canvas, accent, 0.45),
+    body: accent,
+    core: mix(accent, ink, 0.5),
+    peak: ink,
+  };
+};
+
 const rgb = (color: Rgb) =>
   `rgb(${Math.round(color[0])} ${Math.round(color[1])} ${Math.round(color[2])})`;
 
-function ramp(intensity: number): Rgb {
+function ramp(palette: Palette, intensity: number): Rgb {
   if (intensity < 0.4) return mix(palette.edge, palette.body, intensity / 0.4);
   if (intensity < 0.8) {
     return mix(palette.body, palette.core, (intensity - 0.4) / 0.4);
@@ -64,6 +76,8 @@ export function mountTextWave(canvas: HTMLCanvasElement | null) {
   if (!canvas || !context) return;
 
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const scheme = matchMedia("(prefers-color-scheme: dark)");
+  let palette = readPalette(canvas);
   let layout: Layout = { cols: 0, rows: 0 };
   let cellWidth = 0;
   let lineHeight = 0;
@@ -71,8 +85,7 @@ export function mountTextWave(canvas: HTMLCanvasElement | null) {
   let last = 0;
 
   const draw = (t: number) => {
-    context.fillStyle = rgb(palette.background);
-    context.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+    context.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
     const middle = (layout.rows - 1) / 2;
     for (let x = 0; x < layout.cols; x++) {
       const reach = amplitude(x, t, layout);
@@ -82,7 +95,7 @@ export function mountTextWave(canvas: HTMLCanvasElement | null) {
         const inside = distance < reach;
         if (letter === " ") continue;
         const intensity = inside ? 1 - distance / reach : 0;
-        context.fillStyle = rgb(inside ? ramp(intensity) : palette.text);
+        context.fillStyle = rgb(inside ? ramp(palette, intensity) : palette.text);
         context.fillText(letter, x * cellWidth, y * lineHeight);
       }
     }
@@ -122,9 +135,15 @@ export function mountTextWave(canvas: HTMLCanvasElement | null) {
   });
   visibility.observe(canvas);
   document.fonts.ready.then(resize);
+  const recolor = () => {
+    palette = readPalette(canvas);
+    draw(last / 1000);
+  };
+  scheme.addEventListener("change", recolor);
 
   return () => {
     cancelAnimationFrame(frame);
+    scheme.removeEventListener("change", recolor);
     sizes.disconnect();
     visibility.disconnect();
   };
