@@ -698,15 +698,11 @@ main,
 }
 
 .avatar {
-  display: grid;
-  place-items: center;
   flex-shrink: 0;
   width: 36px;
   height: 36px;
   border-radius: var(--radius-control);
-  color: #fff;
-  font-size: 15px;
-  font-weight: 600;
+  object-fit: cover;
 }
 
 .draft {
