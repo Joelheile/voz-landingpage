@@ -3,17 +3,30 @@ import { useInView } from "../hooks/useInView";
 import { useTicks } from "../hooks/useTicks";
 import { PageBar, Panel } from "./Panel";
 
+const periods = ["Today", "7 days", "30 days", "All time"];
+
 const days = [
-  32, 48, 20, 64, 58, 12, 8, 70, 44, 52, 90, 36, 18, 10, 62, 76, 40, 84, 56, 22,
-  14, 66, 72, 50, 96, 60, 28, 80, 88, 100,
+  { label: "Fri", height: 34 },
+  { label: "Sat", height: 62 },
+  { label: "Sun", height: 48 },
+  { label: "Mon", height: 0 },
+  { label: "Tue", height: 70 },
+  { label: "Wed", height: 40 },
+  { label: "Thu", height: 100 },
+];
+
+const tiles = [
+  { value: "148", label: "words per minute" },
+  { value: "9m", label: "talking" },
+  { value: "46", label: "fillers removed" },
 ];
 
 const apps = [
-  { name: "Slack", words: 412 },
-  { name: "Mail", words: 288 },
-  { name: "Cursor", words: 196 },
-  { name: "Notion", words: 154 },
-  { name: "Messages", words: 98 },
+  { name: "Slack", icon: "/apps/slack.png", words: 412 },
+  { name: "Mail", icon: "/apps/mail.png", words: 348 },
+  { name: "Notion", icon: "/apps/notion.png", words: 236 },
+  { name: "Messages", icon: "/apps/messages.png", words: 182 },
+  { name: "Notes", icon: "/apps/notes.png", words: 106 },
 ];
 
 const weekWords = 1284;
@@ -32,35 +45,44 @@ export function InsightsPanel() {
 
   return (
     <div ref={ref} className="insights" data-inview={inView}>
-      <Panel label="Insights: 1,284 words this week, a chart of the last 30 days and top apps">
+      <Panel label="Insights for the last 7 days: 1,284 words, 148 words per minute and the apps you dictate into most">
         <PageBar title="Insights" />
-        <strong className="panel-display">
-          {words.toLocaleString("en-US")} words this week
-        </strong>
-        <p className="panel-text">
-          212 today, 18,940 in total, about 7 h of typing saved. You speak at
-          148 words per minute. You're on a 6-day streak. Your best is 9
-          days. Voz removed 311 filler words.
-        </p>
-        <span className="panel-label">Last 30 days</span>
+        <div className="segmented">
+          {periods.map((period) => (
+            <span key={period} data-selected={period === "7 days"}>
+              {period}
+            </span>
+          ))}
+        </div>
+        <div className="total">
+          <strong>{words.toLocaleString("en-US")}</strong>
+          <span>words</span>
+        </div>
         <div className="chart">
-          {days.map((height, i) => (
-            <i key={i} style={{ ...delay(i * 18), height: `${height}%` }} />
+          {days.map((day, i) => (
+            <span key={day.label}>
+              <i
+                data-empty={day.height === 0}
+                style={{ ...delay(i * 40), height: `${Math.max(day.height, 2)}%` }}
+              />
+              <small>{day.label}</small>
+            </span>
+          ))}
+        </div>
+        <div className="tiles">
+          {tiles.map((tile) => (
+            <span key={tile.label}>
+              <strong>{tile.value}</strong>
+              {tile.label}
+            </span>
           ))}
         </div>
         <span className="panel-label">Top apps</span>
         <ul className="apps">
-          {apps.map((app, i) => (
+          {apps.map((app) => (
             <li key={app.name}>
-              <span>{app.name}</span>
-              <span className="usage">
-                <i
-                  style={{
-                    ...delay(300 + i * 50),
-                    width: `${(app.words / apps[0].words) * 100}%`,
-                  }}
-                />
-              </span>
+              <img src={app.icon} alt="" width={18} height={18} />
+              {app.name}
               <span className="count">{app.words}</span>
             </li>
           ))}
