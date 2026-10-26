@@ -6,8 +6,6 @@ import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { MakeItYours } from "./components/MakeItYours";
 import { Problems } from "./components/Problems";
-import { Solutions } from "./components/Solutions";
-import { Speed } from "./components/Speed";
 
 export default function App() {
   return (
@@ -16,11 +14,9 @@ export default function App() {
       <main>
         <Hero />
         <Problems />
-        <Solutions />
-        <Speed />
-        <Core />
         <MakeItYours />
         <Agent />
+        <Core />
         <Download />
       </main>
       <Footer />

@@ -1,27 +1,61 @@
 import { Headline } from "./Headline";
 import { Section } from "./Section";
 
-const ideas = [
-  "Turn rambling into a clear prompt for your coding agent",
-  "Write mail in your style, with your greeting and sign-off",
-  "File a Linear issue from what you said",
-  "Run a script with a voice command",
+const examples = [
+  {
+    name: "voz-things",
+    say: "todo call Sam, deadline Friday",
+    result: "A to-do in Things 3, due Friday.",
+  },
+  {
+    name: "voz-calendar",
+    say: "calendar deep work tomorrow at 9 for 2 hours",
+    result: "A two-hour block in Apple Calendar.",
+  },
+  {
+    name: "voz-mcp",
+    say: "agent …",
+    result: "Call a tool on one of your connected MCP servers.",
+  },
 ];
 
 export function MakeItYours() {
   return (
     <Section>
-      <Headline text="Build the extensions you need, share them with everyone" />
+      <Headline text="Say it. Put it to work." />
       <p>
-        Instead of a setting for each wish, Voz has extensions. Small TypeScript
-        files that can use your apps, files, terminal and the network. For
-        example:
+        These are extensions I built for my own Mac. Each is a separate
+        TypeScript package. Open the source to see how it works.
       </p>
-      <ul className="ideas">
-        {ideas.map((idea) => (
-          <li key={idea}>{idea}</li>
-        ))}
-      </ul>
+      <div className="extension-examples">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">You say</th>
+              <th scope="col">What happens</th>
+            </tr>
+          </thead>
+          <tbody>
+            {examples.map((example) => (
+              <tr key={example.name}>
+                <td>
+                  <q>{example.say}</q>
+                </td>
+                <td>
+                  <p>{example.result}</p>
+                  <a href={`https://github.com/Joelheile/voz-extensions/tree/main/${example.name}`}>
+                    {example.name}
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="note">
+        By Joel. These examples require extension API 2. Extensions can use
+        external services; built-in dictation runs on your Mac.
+      </p>
     </Section>
   );
 }

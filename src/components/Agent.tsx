@@ -6,16 +6,23 @@ import { Section } from "./Section";
 export function Agent() {
   return (
     <Section>
-      <Headline text="Build extensions at the speed of thought" />
+      <Headline text="Missing one? Write it." />
       <p>
-        Tell a coding agent in <code>~/.voz</code> what you want. It reads the
+        Run <code>voz new voz-jira</code> to create a package, then{" "}
+        <code>voz dev voz-jira</code> to load it. Save a change and Voz reloads
+        it. The extension guide has the API and examples.
+      </p>
+      <p>
+        Or tell a coding agent in <code>~/.voz</code> what you want. It reads the
         guide Voz keeps there and writes the extension. Voz loads it when you
         save.
       </p>
       <AgentDemo />
+      <h3>Publish it. Anyone can install it.</h3>
       <p>
-        Publish it to npm with the <code>voz-package</code> keyword and it shows
-        up in Extensions for everyone.
+        Run <code>npm publish</code> in your package. Include the{" "}
+        <code>voz-package</code> keyword so people can find it in Extensions,
+        or install it with <code>voz install</code> and your package name.
       </p>
       <div className="actions">
         <a className="button" href={links.buildExtension}>
