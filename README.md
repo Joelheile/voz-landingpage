@@ -34,7 +34,7 @@ This builds and runs `wrangler deploy`. You need `wrangler login` once. Pushing 
 
 ## Analytics
 
-Website analytics stay off until a visitor clicks Allow. The choice persists and can be changed under Website analytics in the footer. Data is stored in the EU. There are no session recordings or person profiles, and Do Not Track is respected.
+Until a visitor clicks Allow, PostHog runs in cookieless mode: it stores nothing in the browser and counts visits with a daily server-side hash. Allow adds a browser ID so repeat visits count once. The choice persists and can be changed under Website analytics in the footer. Data is stored in the EU. There are no session recordings or person profiles, and Do Not Track is respected. Page errors are reported to PostHog error tracking.
 
 ## License
 
