@@ -13,7 +13,7 @@ export function AnalyticsConsent() {
     <div className="analytics-consent ph-no-capture">
       <button type="button" onClick={() => setOpen(!open)}>Website analytics</button>
       {open && <div role="region" aria-label="Website analytics">
-        <p>Allow PostHog analytics to measure visits, sources, clicks and install interest? Data is stored in the EU. No session recordings. App usage has a separate opt-in.</p>
+        <p>This site counts visits and clicks without cookies. Allow PostHog to also keep an ID in your browser, so repeat visits count once? Data is stored in the EU. No session recordings.</p>
         <button type="button" onClick={() => choose("yes")}>Allow</button>{" "}
         <button type="button" onClick={() => choose("no")}>Decline</button>
       </div>}
