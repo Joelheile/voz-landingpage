@@ -5,7 +5,7 @@ import { Section } from "./Section";
 const traits = [
   "Lives in the menu bar",
   "Click a transcript to copy it, search finds the rest",
-  "Extensions plug in between the steps. Add none and Voz runs nothing extra",
+  "Use it as it is, or add your own extensions",
 ];
 
 export function Core() {
@@ -13,10 +13,10 @@ export function Core() {
     <Section className="split reverse">
       <HomePanel />
       <div className="split-text">
-        <Headline text="A tiny core that stays fast" />
+        <Headline text="The everyday part stays simple." />
         <p>
           Voz records, transcribes, cleans up and types. It saves your history
-          on your Mac. That is all the core does.
+          on your Mac. Free, MIT licensed, with no monthly fee.
         </p>
         <ul className="ideas">
           {traits.map((trait) => (

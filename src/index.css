@@ -1040,6 +1040,39 @@ main,
   gap: 24px;
 }
 
+.extension-examples table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.extension-examples th,
+.extension-examples td {
+  width: 50%;
+  padding: 20px 16px 20px 0;
+  vertical-align: top;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.extension-examples th {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+}
+
+.extension-examples td:first-child {
+  font-family: var(--mono);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.extension-examples td a {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--ink-secondary);
+}
+
 .browse {
   display: flex;
   flex-direction: column;
@@ -1318,7 +1351,11 @@ main,
   .cards,
   .split,
   .split.reverse {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero .headline {
+    font-size: 36px;
   }
 
   .header nav a:not(.button) {
