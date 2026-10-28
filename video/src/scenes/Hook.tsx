@@ -1,12 +1,12 @@
-import { AbsoluteFill, useCurrentFrame } from "remotion";
+import { AbsoluteFill } from "remotion";
 import { Headline } from "../components/Headline";
 import { Notch } from "../components/Notch";
 import { TextWave } from "../components/TextWave";
-import { progress } from "../motion";
+import { progress, useFrame } from "../motion";
 import { color } from "../theme";
 
 export const Hook: React.FC = () => {
-  const frame = useCurrentFrame();
+  const frame = useFrame();
   const plate = progress(frame, 4, 10);
 
   return (

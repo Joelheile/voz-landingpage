@@ -1,10 +1,15 @@
-import { Easing, interpolate } from "remotion";
-import { FPS } from "./theme";
+import { Easing, interpolate, useCurrentFrame } from "remotion";
+import { FPS, RENDER_FPS } from "./theme";
 
 const easeOut = Easing.bezier(0.23, 1, 0.32, 1);
+export const easeIn = Easing.bezier(0.3, 0, 0.8, 0.15);
 export const springOut = Easing.bezier(0.34, 1.25, 0.64, 1);
 
 export const ms = (value: number) => (value / 1000) * FPS;
+
+export const toRender = (frames: number) => (frames * RENDER_FPS) / FPS;
+
+export const useFrame = () => (useCurrentFrame() * FPS) / RENDER_FPS;
 
 export const progress = (
   frame: number,
@@ -50,5 +55,5 @@ export const popAt = (frame: number, at: number) =>
 
 export const pop = (p: number) => ({
   opacity: Math.min(1, p * 2),
-  transform: `scale(${0.6 + 0.4 * p})`,
+  transform: `scale(${0.8 + 0.2 * p})`,
 });

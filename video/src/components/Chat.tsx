@@ -1,3 +1,4 @@
+import { Img, staticFile } from "remotion";
 import { color } from "../theme";
 import { Caret, Panel } from "./Panel";
 
@@ -5,37 +6,55 @@ export type Message = {
   author: string;
   text: string;
   tint: string;
+  photo?: string;
   style?: React.CSSProperties;
 };
 
 export const team: Message[] = [
-  { author: "Emma", text: "Is the deck ready for tomorrow?", tint: "#C9785B" },
+  {
+    author: "Emma",
+    text: "Is the deck ready for tomorrow?",
+    tint: "#C9785B",
+    photo: "avatars/emma.jpg",
+  },
   {
     author: "Jake",
     text: "Tom wants it tonight if possible.",
     tint: "#5B9AC9",
+    photo: "avatars/jake.jpg",
   },
 ];
 
+const avatar: React.CSSProperties = {
+  width: 50,
+  height: 50,
+  flexShrink: 0,
+  borderRadius: 12,
+};
+
 const Row: React.FC<{ message: Message }> = ({ message }) => (
   <div style={{ display: "flex", gap: 16, ...message.style }}>
-    <div
-      style={{
-        width: 50,
-        height: 50,
-        flexShrink: 0,
-        borderRadius: 12,
-        background: message.tint,
-        color: "#fff",
-        fontSize: 22,
-        fontWeight: 600,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      {message.author[0]}
-    </div>
+    {message.photo ? (
+      <Img
+        src={staticFile(message.photo)}
+        style={{ ...avatar, objectFit: "cover" }}
+      />
+    ) : (
+      <div
+        style={{
+          ...avatar,
+          background: message.tint,
+          color: "#fff",
+          fontSize: 22,
+          fontWeight: 600,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {message.author[0]}
+      </div>
+    )}
     <div>
       <div style={{ fontSize: 22, fontWeight: 600 }}>{message.author}</div>
       <div style={{ fontSize: 29, marginTop: 2 }}>{message.text}</div>

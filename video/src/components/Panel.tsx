@@ -1,4 +1,4 @@
-import { useCurrentFrame } from "remotion";
+import { useFrame } from "../motion";
 import { color, font, shadow } from "../theme";
 
 export const Panel: React.FC<{
@@ -55,7 +55,7 @@ export const Panel: React.FC<{
 );
 
 export const Caret: React.FC<{ height?: number }> = ({ height = 34 }) => {
-  const frame = useCurrentFrame();
+  const frame = useFrame();
   return (
     <span
       style={{

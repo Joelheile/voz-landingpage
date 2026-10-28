@@ -1,5 +1,4 @@
-import { useCurrentFrame } from "remotion";
-import { enter, ms, progress } from "../motion";
+import { enter, ms, progress, useFrame } from "../motion";
 import { color, font } from "../theme";
 
 export const Headline: React.FC<{
@@ -9,7 +8,7 @@ export const Headline: React.FC<{
   display?: boolean;
   style?: React.CSSProperties;
 }> = ({ text, at = 0, size = 96, display = false, style }) => {
-  const frame = useCurrentFrame();
+  const frame = useFrame();
   let index = 0;
 
   return (

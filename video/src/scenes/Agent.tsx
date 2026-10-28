@@ -1,40 +1,25 @@
-import { AbsoluteFill, useCurrentFrame } from "remotion";
+import { AbsoluteFill } from "remotion";
 import { Chat, team } from "../components/Chat";
 import { Headline } from "../components/Headline";
 import { Panel } from "../components/Panel";
 import { Scene } from "../components/Scene";
-import { enter, ms, pop, popAt, progress, rise, typed } from "../motion";
+import { enter, ms, pop, popAt, progress, rise, typed, useFrame } from "../motion";
 import { color, font } from "../theme";
 
 const ASK = 'add a voice command: when I say "send it", press return';
 const CODE =
   'voz.registerCommand("send it",\n  (event, ctx) => ctx.press("return"));';
-const SWAP = 60;
 const SPOKEN = 110;
 const SEND = 132;
 
 export const Agent: React.FC = () => {
-  const frame = useCurrentFrame();
-  const question = 1 - progress(frame, SWAP, ms(200));
+  const frame = useFrame();
   const spoken = popAt(frame, SPOKEN) * (1 - progress(frame, SEND, ms(200)));
   const sent = popAt(frame, SEND);
 
   return (
-    <Scene gap={60}>
-      <div style={{ display: "grid", placeItems: "center", height: 110 }}>
-        <div style={{ gridArea: "1 / 1", opacity: question }}>
-          <Headline text="Tell your agent what you want." size={84} />
-        </div>
-        {frame >= SWAP ? (
-          <div style={{ gridArea: "1 / 1" }}>
-            <Headline
-              text="Build extensions at the speed of thought."
-              size={76}
-              at={SWAP}
-            />
-          </div>
-        ) : null}
-      </div>
+    <Scene gap={50}>
+      <Headline text="Missing a feature? Tell your agent." size={84} />
       <div style={{ display: "flex", gap: 40, alignItems: "stretch" }}>
         <Panel
           title="~/.voz"
@@ -124,6 +109,19 @@ export const Agent: React.FC = () => {
             </div>
           </AbsoluteFill>
         </div>
+      </div>
+      <div
+        style={{
+          padding: "16px 40px",
+          borderRadius: 999,
+          background: color.accent,
+          color: "#fff",
+          fontSize: 40,
+          fontWeight: 600,
+          ...pop(popAt(frame, SEND + 8)),
+        }}
+      >
+        0 PRs, 0 waiting
       </div>
     </Scene>
   );

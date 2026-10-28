@@ -1,6 +1,6 @@
-import { interpolate, useCurrentFrame } from "remotion";
+import { interpolate } from "remotion";
 import { Scene } from "../components/Scene";
-import { ms, pop, popAt, progress } from "../motion";
+import { ms, pop, popAt, progress, useFrame } from "../motion";
 import { color, font, shadow } from "../theme";
 
 const Settings: React.FC<{ frame: number }> = ({ frame }) => (
@@ -101,14 +101,14 @@ const cards = [
 ];
 
 export const Problems: React.FC = () => {
-  const frame = useCurrentFrame();
+  const frame = useFrame();
 
   return (
     <Scene>
       <div style={{ display: "flex", gap: 40 }}>
         {cards.map((card, i) => {
-          const at = i * 12;
-          const struck = progress(frame, at + 30, ms(260));
+          const at = i * 6;
+          const struck = progress(frame, at + 22, ms(220));
           return (
             <div
               key={card.label}

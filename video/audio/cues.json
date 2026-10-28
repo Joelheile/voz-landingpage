@@ -1,0 +1,236 @@
+[
+ {
+  "t": 0.0,
+  "role": "pop",
+  "file": "pop_1.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 0.333,
+  "role": "pop",
+  "file": "pop_2.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 0.633,
+  "role": "pop",
+  "file": "pop_3.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 0.933,
+  "role": "pop",
+  "file": "pop_4.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 1.233,
+  "role": "pop",
+  "file": "pop_1.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 2.8,
+  "role": "whoosh.long",
+  "file": "whoosh-long_1.wav",
+  "gain_db": -5.0
+ },
+ {
+  "t": 2.933,
+  "role": "land",
+  "file": "land_1.wav",
+  "gain_db": -5.0
+ },
+ {
+  "t": 5.0,
+  "role": "pop",
+  "file": "pop_2.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 5.2,
+  "role": "pop",
+  "file": "pop_3.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 5.4,
+  "role": "pop",
+  "file": "pop_4.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 5.733,
+  "role": "strike",
+  "file": "page-turn.wav",
+  "gain_db": -13.0
+ },
+ {
+  "t": 5.933,
+  "role": "strike",
+  "file": "page-turn.wav",
+  "gain_db": -13.0
+ },
+ {
+  "t": 6.133,
+  "role": "strike",
+  "file": "page-turn.wav",
+  "gain_db": -13.0
+ },
+ {
+  "t": 8.433,
+  "role": "click",
+  "file": "mouse-click.wav",
+  "gain_db": -10.0
+ },
+ {
+  "t": 10.933,
+  "role": "click",
+  "file": "mouse-click.wav",
+  "gain_db": -10.0
+ },
+ {
+  "t": 11.733,
+  "role": "ding",
+  "file": "ding.wav",
+  "gain_db": -10.0
+ },
+ {
+  "t": 12.2,
+  "role": "whoosh.short",
+  "file": "whoosh-short_1.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 12.4,
+  "role": "pop",
+  "file": "pop_1.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 12.867,
+  "role": "pop",
+  "file": "pop_2.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 13.333,
+  "role": "pop",
+  "file": "pop_3.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 14.733,
+  "role": "key",
+  "file": "key_1.wav",
+  "gain_db": -12.0
+ },
+ {
+  "t": 14.833,
+  "role": "key",
+  "file": "key_2.wav",
+  "gain_db": -12.0
+ },
+ {
+  "t": 14.933,
+  "role": "key",
+  "file": "key_3.wav",
+  "gain_db": -12.0
+ },
+ {
+  "t": 15.033,
+  "role": "key",
+  "file": "key_4.wav",
+  "gain_db": -12.0
+ },
+ {
+  "t": 15.133,
+  "role": "key",
+  "file": "key_5.wav",
+  "gain_db": -12.0
+ },
+ {
+  "t": 15.233,
+  "role": "key",
+  "file": "key_6.wav",
+  "gain_db": -12.0
+ },
+ {
+  "t": 15.333,
+  "role": "key",
+  "file": "key_7.wav",
+  "gain_db": -12.0
+ },
+ {
+  "t": 15.433,
+  "role": "key",
+  "file": "key_8.wav",
+  "gain_db": -12.0
+ },
+ {
+  "t": 15.533,
+  "role": "key",
+  "file": "key_9.wav",
+  "gain_db": -12.0
+ },
+ {
+  "t": 17.2,
+  "role": "key",
+  "file": "key_10.wav",
+  "gain_db": -12.0
+ },
+ {
+  "t": 17.3,
+  "role": "key",
+  "file": "key_11.wav",
+  "gain_db": -12.0
+ },
+ {
+  "t": 17.4,
+  "role": "key",
+  "file": "key_12.wav",
+  "gain_db": -12.0
+ },
+ {
+  "t": 17.5,
+  "role": "key",
+  "file": "key_1.wav",
+  "gain_db": -12.0
+ },
+ {
+  "t": 18.067,
+  "role": "pop",
+  "file": "pop_4.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 18.8,
+  "role": "key.return",
+  "file": "key-return_1.wav",
+  "gain_db": -10.0
+ },
+ {
+  "t": 19.067,
+  "role": "pop",
+  "file": "pop_1.wav",
+  "gain_db": -7.0
+ },
+ {
+  "t": 20.067,
+  "role": "land",
+  "file": "land_2.wav",
+  "gain_db": -5.0
+ },
+ {
+  "t": 20.067,
+  "role": "whoosh.long",
+  "file": "whoosh-long_1.wav",
+  "gain_db": -5.0
+ },
+ {
+  "t": 20.4,
+  "role": "pop",
+  "file": "pop_2.wav",
+  "gain_db": -7.0
+ }
+]

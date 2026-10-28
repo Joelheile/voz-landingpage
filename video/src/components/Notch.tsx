@@ -1,5 +1,4 @@
-import { useCurrentFrame } from "remotion";
-import { enter, ms, progress, springOut } from "../motion";
+import { enter, ms, progress, springOut, useFrame } from "../motion";
 import { FPS } from "../theme";
 
 export type NotchTimes = {
@@ -38,7 +37,7 @@ const Ear: React.FC<{ side: "left" | "right" }> = ({ side }) => (
 );
 
 export const Notch: React.FC<{ times: NotchTimes }> = ({ times }) => {
-  const frame = useCurrentFrame();
+  const frame = useFrame();
   const { start, stop, done, hidden } = times;
   const open =
     progress(frame, start, ms(340), springOut) -

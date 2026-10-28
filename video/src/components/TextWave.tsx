@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
-import { useCurrentFrame } from "remotion";
+import { useFrame } from "../motion";
 import { FPS, color, font } from "../theme";
 
 type Rgb = readonly [number, number, number];
@@ -74,7 +74,7 @@ export const TextWave: React.FC<{
   gain?: number;
   style?: React.CSSProperties;
 }> = ({ gain = 1, style }) => {
-  const frame = useCurrentFrame();
+  const frame = useFrame();
   const ref = useRef<HTMLCanvasElement>(null);
 
   useLayoutEffect(() => {

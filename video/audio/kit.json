@@ -1,0 +1,50 @@
+{
+ "kit": 1,
+ "name": "voz-effects-only",
+ "sr": 48000,
+ "note": "Effects-only launch film, from earshot's minimal preset. Recorded sounds (click, ding, page turn) live in audio/recorded; see docs/research/launch-video-sound-map.md.",
+ "roles": {
+  "pop": {
+   "sound": "pro_pop_in/round",
+   "takes": 4,
+   "align": "onset",
+   "level_db": -7.0,
+   "note": "element pop-in: rows, cards, pills arriving (80-150 Hz thump + tick, lands 25-40 ms after)"
+  },
+  "land": {
+   "sound": "pro_pop_in/deep",
+   "takes": 3,
+   "align": "onset",
+   "level_db": -5.0,
+   "note": "a bigger element arriving: the app icon"
+  },
+  "whoosh.long": {
+   "sound": "pro_whoosh_big/swell",
+   "takes": 1,
+   "align": "peak",
+   "level_db": -5.0,
+   "note": "the one section change into the hook: a low designed swell, peak on the cut"
+  },
+  "whoosh.short": {
+   "sound": "whoosh_fast/heavy",
+   "takes": 2,
+   "align": "peak",
+   "level_db": -7.0,
+   "note": "a scene cut"
+  },
+  "key": {
+   "sound": "pro_typing_key/glass",
+   "takes": 12,
+   "align": "onset",
+   "level_db": -12.0,
+   "note": "designed key ticks, a new take per key"
+  },
+  "key.return": {
+   "sound": "pro_typing_key/double",
+   "takes": 1,
+   "align": "onset",
+   "level_db": -10.0,
+   "note": "the last key of a typed message"
+  }
+ }
+}

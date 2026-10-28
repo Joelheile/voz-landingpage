@@ -1,9 +1,10 @@
 import { loadFont as loadLocal } from "@remotion/fonts";
-import { loadFont as loadSans } from "@remotion/google-fonts/Geist";
+import { loadFont as loadSans } from "@remotion/google-fonts/MonaSans";
 import { loadFont as loadMono } from "@remotion/google-fonts/GeistMono";
 import { staticFile } from "remotion";
 
 export const FPS = 30;
+export const RENDER_FPS = 60;
 
 export const color = {
   canvas: "#F6F4EF",
@@ -14,7 +15,7 @@ export const color = {
   inkTertiary: "#7B7870",
   hairline: "rgba(20,20,20,0.08)",
   selected: "#E9E6DF",
-  accent: "#5163F9",
+  accent: "#0057FF",
 };
 
 export const shadow =

@@ -1,11 +1,10 @@
-import { useCurrentFrame } from "remotion";
 import { AppIcon } from "../components/AppIcon";
 import { Scene } from "../components/Scene";
-import { pop, popAt } from "../motion";
+import { pop, popAt, useFrame } from "../motion";
 import { color, font } from "../theme";
 
 export const Cta: React.FC = () => {
-  const frame = useCurrentFrame();
+  const frame = useFrame();
 
   return (
     <Scene gap={72}>
@@ -38,7 +37,7 @@ export const Cta: React.FC = () => {
           fontSize: 76,
           fontWeight: 600,
           letterSpacing: "-0.02em",
-          boxShadow: "0 20px 50px rgba(81,99,249,0.35)",
+          boxShadow: "0 20px 50px rgba(0,87,255,0.3)",
           ...pop(popAt(frame, 10)),
         }}
       >

@@ -1,9 +1,9 @@
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, interpolate } from "remotion";
 import { Chat } from "../components/Chat";
 import { Headline } from "../components/Headline";
 import { Notch } from "../components/Notch";
 import { Scene } from "../components/Scene";
-import { enter, ms, progress, scene } from "../motion";
+import { enter, ms, progress, scene, useFrame } from "../motion";
 import { color, font } from "../theme";
 
 const words = [
@@ -125,7 +125,7 @@ const press = (frame: number, key: number) =>
   );
 
 export const Dictation: React.FC = () => {
-  const frame = useCurrentFrame();
+  const frame = useFrame();
   const t = frame / TICK;
   const speaking = frame >= FIRST_WORD && frame < LAST_WORD;
   const recording =
