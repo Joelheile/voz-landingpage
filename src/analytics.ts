@@ -54,8 +54,16 @@ export function trackInstallCopy(location: "hero" | "footer", state: "copied" | 
   client?.capture("install_command_copy", { location, state, method: "terminal" });
 }
 
-export function trackFeatureRequest(location: "header" | "download") {
+export function trackFeatureRequest(location: "download") {
   client?.capture("feature_request_opened", { location, destination: "github" });
+}
+
+export function trackStar(location: "header" | "hero" | "build" | "download") {
+  client?.capture("github_star_opened", { location });
+}
+
+export function trackVideoSound(state: "on" | "off") {
+  client?.capture("launch_video_sound", { state });
 }
 
 void startAnalytics();

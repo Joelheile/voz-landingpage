@@ -1,5 +1,5 @@
-import { trackFeatureRequest } from "../analytics";
 import { links } from "../links";
+import { StarButton } from "./StarButton";
 
 export function Header() {
   return (
@@ -11,7 +11,7 @@ export function Header() {
       <nav>
         <a href={links.extensions}>Extensions</a>
         <a href={links.buildExtension}>Build</a>
-        <a href={links.featureRequest} onClick={() => trackFeatureRequest("header")}>Request a feature</a>
+        <StarButton location="header" label="Star" />
         <a className="button small" href={links.install}>
           Install
         </a>

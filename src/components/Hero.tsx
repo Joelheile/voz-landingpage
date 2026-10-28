@@ -2,7 +2,8 @@ import { delay } from "../delay";
 import { installCommand } from "../links";
 import { CopyCommand } from "./CopyCommand";
 import { Headline } from "./Headline";
-import { Pipeline } from "./Pipeline";
+import { LaunchVideo } from "./LaunchVideo";
+import { StarButton } from "./StarButton";
 
 export function Hero() {
   return (
@@ -15,9 +16,11 @@ export function Hero() {
       </p>
       <div id="install" className="get rise" style={delay(550)}>
         <CopyCommand command={installCommand} location="hero" />
+        <p className="note">Needs macOS 26 on Apple Silicon.</p>
+        <StarButton location="hero" label="Star Voz on GitHub" />
       </div>
       <div className="rise" style={delay(700)}>
-        <Pipeline />
+        <LaunchVideo />
       </div>
     </section>
   );
