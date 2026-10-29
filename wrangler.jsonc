@@ -2,8 +2,11 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "voz-landingpage",
   "compatibility_date": "2026-10-19",
+  "main": "worker/index.ts",
   "routes": [{ "pattern": "voz.joels.tech", "custom_domain": true }],
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/extensions.svg"],
   },
 }
