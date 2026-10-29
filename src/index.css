@@ -311,6 +311,13 @@ main,
   fill: #f5b301;
 }
 
+.star-count {
+  padding-left: 8px;
+  border-left: 1px solid var(--hairline);
+  color: var(--ink-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
 .star-button:hover {
   border-color: var(--ink-tertiary);
 }
