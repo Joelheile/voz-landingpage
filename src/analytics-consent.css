@@ -1,8 +1,9 @@
 .analytics-consent { font-size: 13px; color: var(--ink-secondary); }
-.analytics-consent > div { position: fixed; z-index: 20; bottom: 16px; right: 16px; width: min(380px, calc(100vw - 32px)); padding: 20px; background: var(--surface); color: var(--ink); border: 1px solid var(--hairline); border-radius: var(--radius-row); box-shadow: var(--shadow); }
-.analytics-consent p { margin: 0 0 12px; }
+.analytics-consent > div { position: fixed; z-index: 20; bottom: 12px; right: 12px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; max-width: min(380px, calc(100vw - 24px)); padding: 6px 6px 6px 12px; background: var(--surface); color: var(--ink); border: 1px solid var(--hairline); border-radius: var(--radius-row); box-shadow: var(--shadow); }
+.analytics-consent p { margin: 0; }
+.analytics-consent .analytics-details { flex-basis: 100%; padding: 0 6px 6px 0; color: var(--ink-secondary); }
 .analytics-consent button { cursor: pointer; text-decoration: underline; }
-.analytics-consent > div button { min-height: 32px; padding: 4px 12px; border: 1px solid var(--hairline); border-radius: var(--radius-control); }
+.analytics-consent > div button { min-height: 28px; padding: 2px 10px; text-decoration: none; border: 1px solid var(--hairline, currentColor); border-radius: var(--radius-control); }
 
 .feature-request { margin: 12px 0 0; font-size: 14px; color: var(--ink-secondary); }
 .feature-request a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }

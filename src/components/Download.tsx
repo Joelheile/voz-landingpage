@@ -2,6 +2,7 @@ import { trackFeatureRequest } from "../analytics";
 import { installCommand, links } from "../links";
 import { CopyCommand } from "./CopyCommand";
 import { Headline } from "./Headline";
+import { StarButton } from "./StarButton";
 import { Section } from "./Section";
 
 export function Download() {
@@ -10,6 +11,7 @@ export function Download() {
       <Headline text="For people who want their tools their way" />
       <div className="get">
         <CopyCommand command={installCommand} location="footer" />
+        <StarButton location="download" label="Like it? Star Voz on GitHub" />
         <p className="feature-request">Missing something? <a href={links.featureRequest} onClick={() => trackFeatureRequest("download")}>Request a feature on GitHub</a></p>
       </div>
     </Section>
