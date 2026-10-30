@@ -50,7 +50,7 @@ export function setAnalyticsChoice(choice: "yes" | "no") {
   } else client?.opt_out_capturing();
 }
 
-export function trackInstallCopy(location: "hero" | "footer", state: "copied" | "failed") {
+export function trackInstallCopy(location: "header" | "hero" | "footer", state: "copied" | "failed") {
   client?.capture("install_command_copy", { location, state, method: "terminal" });
 }
 

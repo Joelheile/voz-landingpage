@@ -1,4 +1,5 @@
 import { links } from "../links";
+import { InstallButton } from "./InstallButton";
 import { StarButton, StarCount } from "./StarButton";
 
 export function Header() {
@@ -14,9 +15,7 @@ export function Header() {
         <StarButton location="header" label="GitHub" icon="github">
           <StarCount />
         </StarButton>
-        <a className="button small" href={links.install}>
-          Install
-        </a>
+        <InstallButton />
       </nav>
     </header>
   );
