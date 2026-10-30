@@ -311,6 +311,10 @@ main,
   fill: #f5b301;
 }
 
+.star-button svg.github-icon {
+  fill: currentColor;
+}
+
 .star-count {
   padding-left: 8px;
   border-left: 1px solid var(--hairline);

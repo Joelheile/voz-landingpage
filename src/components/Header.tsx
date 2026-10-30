@@ -11,7 +11,7 @@ export function Header() {
       <nav>
         <a href={links.extensions}>Extensions</a>
         <a href={links.buildExtension}>Build</a>
-        <StarButton location="header" label="Star">
+        <StarButton location="header" label="GitHub" icon="github">
           <StarCount />
         </StarButton>
         <a className="button small" href={links.install}>
